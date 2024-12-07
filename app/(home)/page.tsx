@@ -1,4 +1,4 @@
-import Link from "next/link";
+// import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -12,7 +12,6 @@ export default async function HomePage() {
 	} else {
 		redirect("/dash");
 	}
-  
 
 	// return (
 	// 	<main className="flex flex-col justify-center flex-1 text-center">
@@ -28,5 +27,5 @@ export default async function HomePage() {
 	// 			and see the documentation.
 	// 		</p>
 	// 	</main>
-	);
+	// );
 }
