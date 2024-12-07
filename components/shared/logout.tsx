@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Loader2, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface LogoutButtonProps extends React.ComponentProps<typeof Button> {}
+type LogoutButtonProps = React.ComponentProps<typeof Button>;
 
 export function LogoutButton({ className, ...props }: LogoutButtonProps) {
 	const [isLoading, setIsLoading] = useState(false);

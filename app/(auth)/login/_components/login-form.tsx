@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useHookFormAction } from "@next-safe-action/adapter-react-hook-form/hooks";
-import { ArrowLeft, Lightbulb, Loader2 } from "lucide-react";
+import { Lightbulb, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import {
