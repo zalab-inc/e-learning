@@ -1,8 +1,8 @@
 import { SidebarHeader } from "@/components/dashboard/sidebar-header";
-import { SidebarFooter } from "@/components/dashboard/sidebar-footer";
 import {
 	Sidebar,
 	SidebarContent,
+	SidebarFooter,
 	SidebarGroup,
 	SidebarGroupContent,
 	SidebarGroupLabel,
@@ -11,7 +11,7 @@ import {
 	SidebarMenuItem,
 	SidebarRail,
 } from "@/components/ui/sidebar";
-
+import { NavUser } from "@/components/dashboard/nav-user";
 // This is sample data.
 const data = {
 	versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
@@ -35,6 +35,11 @@ const data = {
 			],
 		},
 	],
+	user: {
+		name: "John Doe",
+		email: "john@example.com",
+		avatar: "/avatars/user.png",
+	},
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -60,7 +65,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 					</SidebarGroup>
 				))}
 			</SidebarContent>
-			<SidebarFooter />
+			<SidebarFooter>
+				<NavUser user={data.user} />
+			</SidebarFooter>
 			<SidebarRail />
 		</Sidebar>
 	);

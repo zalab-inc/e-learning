@@ -1,4 +1,5 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
+import { FumaHeader } from "@/components/shared/fuma-header";
 
 /**
  * Shared layout configurations
@@ -9,12 +10,12 @@ import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
  */
 export const baseOptions: BaseLayoutProps = {
 	nav: {
-		title: "My App",
+		component: <FumaHeader />,
 	},
 	links: [
 		{
 			text: "Dashboard",
-			url: "/dash",
+			url: "/dashboard",
 			active: "nested-url",
 		},
 	],
