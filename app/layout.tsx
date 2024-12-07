@@ -1,18 +1,26 @@
-import './global.css';
-import { RootProvider } from 'fumadocs-ui/provider';
-import { Inter } from 'next/font/google';
-import type { ReactNode } from 'react';
+import type { Metadata } from "next";
+import { inter } from "@/lib/fonts";
+import { Toaster } from "@/components/ui/sonner";
+import NextTopLoader from "nextjs-toploader";
+import "@/app/global.css";
 
-const inter = Inter({
-  subsets: ['latin'],
-});
+export const metadata: Metadata = {
+	title: "Fumadocs",
+	description: "Fumadocs",
+};
 
-export default function Layout({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en" className={inter.className} suppressHydrationWarning>
-      <body className="flex flex-col min-h-screen">
-        <RootProvider>{children}</RootProvider>
-      </body>
-    </html>
-  );
+export default function RootLayout({
+	children,
+}: Readonly<{
+	children: React.ReactNode;
+}>) {
+	return (
+		<html lang="en" suppressHydrationWarning>
+			<body className={`${inter.className} antialiased`}>
+				<NextTopLoader color="#333" key="top-loader" zIndex={1000} />
+				{children}
+				<Toaster position="top-right" duration={3000} closeButton richColors />
+			</body>
+		</html>
+	);
 }

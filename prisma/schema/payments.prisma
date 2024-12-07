@@ -1,0 +1,14 @@
+model Payment {
+    id          String   @id
+    amount      Int
+    currency    String   @db.VarChar(3)
+    status      String   @db.VarChar(20)
+    description String?  @db.Text
+    metadata    Json?
+    createdAt   DateTime
+    updatedAt   DateTime
+    userId      String
+    user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@map("payment")
+}
