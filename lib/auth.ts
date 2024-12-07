@@ -13,4 +13,9 @@ export const auth = betterAuth({
 		enabled: true,
 		requireEmailVerification: false,
 	},
+	trustedOrigins: [
+		"http://e-learning.kelasinovatif.com:3000/api/auth",
+		"http://localhost:3001",
+		"https://e-learning.kelasinovatif.com",
+	],
 });
