@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "git pull && next build",
+    "build": "git pull && next build && pm2 reload e-learning:3001",
     "dev": "next dev",
     "start": "next start -p 3001",
     "lint": "next lint",
