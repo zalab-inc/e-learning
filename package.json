@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "git pull && next build",
+    "reload": "pm2 reload 1",
     "dev": "next dev",
     "start": "next start -p 3001",
     "lint": "next lint",
