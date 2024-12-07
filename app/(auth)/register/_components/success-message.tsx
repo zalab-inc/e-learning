@@ -14,7 +14,7 @@ export function SuccessMessage() {
 						memulai.
 					</p>
 				</div>
-				<Link href="/dash">
+				<Link href="/dashboard">
 					<Button>Masuk ke Dashboard</Button>
 				</Link>
 			</div>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useHookFormAction } from "@next-safe-action/adapter-react-hook-form/hooks";
-import { Loader2 } from "lucide-react";
+import { Lightbulb, Loader2 } from "lucide-react";
 import { useState } from "react";
 
 import { registerAction } from "@/actions/auth";
@@ -60,6 +60,12 @@ export function RegisterForm() {
 
 	return (
 		<div className="flex flex-col min-h-[50vh] h-full w-full items-center justify-center px-4">
+			<Link href="/" className="flex flex-col items-center gap-2 mb-8">
+				<div className="flex items-center justify-center w-12 h-12 rounded-lg bg-primary text-primary-foreground">
+					<Lightbulb className="w-6 h-6" />
+				</div>
+				<span className="text-lg font-semibold">KelasInvotif.com</span>
+			</Link>
 			<Card className="max-w-sm mx-auto">
 				<CardHeader>
 					<CardTitle className="text-2xl">Daftar</CardTitle>
@@ -149,6 +155,11 @@ export function RegisterForm() {
 					</div>
 				</CardContent>
 			</Card>
+			<div className="mt-6 text-sm text-muted-foreground">
+				<Link href="/" className="transition-colors hover:text-foreground">
+					Kembali ke Beranda
+				</Link>
+			</div>
 		</div>
 	);
 }
