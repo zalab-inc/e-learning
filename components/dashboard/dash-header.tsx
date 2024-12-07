@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -27,11 +28,8 @@ export function DashHeader({ items = [] }: DashHeaderProps) {
 			<Breadcrumb>
 				<BreadcrumbList>
 					{items.map((item, index) => (
-						<>
-							<BreadcrumbItem
-								key={`${item.title}-${item.href}`}
-								className="hidden md:block"
-							>
+						<Fragment key={`${item.title}-${item.href}`}>
+							<BreadcrumbItem className="hidden md:block">
 								{!item.current ? (
 									<BreadcrumbLink href={item.href || "#"}>
 										{item.title}
@@ -43,7 +41,7 @@ export function DashHeader({ items = [] }: DashHeaderProps) {
 							{!item.current && index < items.length - 1 && (
 								<BreadcrumbSeparator className="hidden md:block" />
 							)}
-						</>
+						</Fragment>
 					))}
 				</BreadcrumbList>
 			</Breadcrumb>

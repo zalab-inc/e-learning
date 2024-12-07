@@ -28,6 +28,10 @@ const data = {
 					title: "Profile",
 					url: "#",
 				},
+				{
+					title: "Courses",
+					url: "/course",
+				},
 			],
 		},
 	],
