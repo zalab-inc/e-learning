@@ -8,17 +8,26 @@ import { cn } from "@/lib/utils";
 
 type LogoutButtonProps = React.ComponentProps<typeof Button>;
 
-export function LogoutButton({ className, ...props }: LogoutButtonProps) {
+export function LogoutButton({
+	className,
+	onClick,
+	...props
+}: LogoutButtonProps) {
 	const [isLoading, setIsLoading] = useState(false);
 	const router = useRouter();
 
-	const handleLogout = async () => {
+	const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
+		if (onClick) {
+			onClick(e);
+		}
+
 		setIsLoading(true);
 		try {
 			await authClient.signOut();
 			await new Promise((resolve) => setTimeout(resolve, 100));
 			router.replace("/");
-		} catch {
+		} catch (error) {
+			console.error("Failed to sign out:", error);
 			alert("Failed to sign out");
 		} finally {
 			setIsLoading(false);
