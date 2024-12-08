@@ -30,11 +30,13 @@ import { useRouter } from "next/navigation";
 export function ForgotForm() {
 	const router = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
-	const { form, handleSubmitWithAction, resetFormAndAction } =
-		useHookFormAction(forgotAction, zodResolver(ForgotSchema), {
+	const { form, handleSubmitWithAction } = useHookFormAction(
+		forgotAction,
+		zodResolver(ForgotSchema),
+		{
 			actionProps: {
 				onSuccess: (result) => {
-					if (result.data?.data?.successful) {
+					if (result.data?.success) {
 						router.push("/forgot/success");
 					}
 				},
@@ -67,7 +69,8 @@ export function ForgotForm() {
 			errorMapProps: {
 				joinBy: " dan ",
 			},
-		});
+		},
+	);
 
 	// Clear root error when form fields change
 	useEffect(() => {

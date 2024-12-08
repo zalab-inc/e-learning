@@ -17,7 +17,7 @@ export const auth = betterAuth({
 		requireEmailVerification: false,
 		resetPasswordPath: "/reset-password",
 		resetPasswordTokenQueryParam: "token",
-		sendResetPassword: async ({ user, token }, request) => {
+		sendResetPassword: async ({ user, token }) => {
 			const resetUrl = `${BASE_URL}/reset-password?token=${token}`;
 			await sendEmail({
 				to: user.email,

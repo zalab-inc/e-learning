@@ -25,14 +25,12 @@ import {
 import { PasswordInput } from "@/components/shared/password-input";
 import { ChangePasswordSchema } from "@/defs/auth-schema";
 import { changePasswordAction } from "@/actions/auth";
-import { useRouter } from "next/navigation";
 
 interface ResetPasswordFormProps {
 	token?: string;
 }
 
 export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
-	const router = useRouter();
 	const [isSuccess, setIsSuccess] = useState(false);
 
 	const { form, handleSubmitWithAction } = useHookFormAction(
