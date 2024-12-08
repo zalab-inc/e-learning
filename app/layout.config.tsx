@@ -1,5 +1,5 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
-import { FumaHeader } from "@/components/shared/fuma-header";
+import { Lightbulb } from "lucide-react";
 
 /**
  * Shared layout configurations
@@ -10,13 +10,18 @@ import { FumaHeader } from "@/components/shared/fuma-header";
  */
 export const baseOptions: BaseLayoutProps = {
 	nav: {
-		component: <FumaHeader />,
+		title: (
+			<div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary text-primary-foreground">
+				<Lightbulb className="w-5 h-5" />
+			</div>
+		),
+		url: "/dashboard",
 	},
 	links: [
 		{
 			text: "Dashboard",
 			url: "/dashboard",
-			active: "nested-url",
+			active: "none",
 		},
 	],
 };

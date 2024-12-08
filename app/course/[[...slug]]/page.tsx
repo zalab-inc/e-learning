@@ -4,6 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
+import React from "react";
 
 export default async function Page(props: {
 	params: Promise<{ slug?: string[] }>;
