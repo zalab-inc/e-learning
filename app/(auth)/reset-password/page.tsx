@@ -1,5 +1,5 @@
 import React from "react";
-import { ResetPasswordForm } from "@/app/(auth)/reset-password/_components/reset-password-form";
+import { ResetPasswordForm } from "./_components/reset-password-form";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -11,14 +11,21 @@ export const metadata: Metadata = {
 	},
 };
 
-export default function ResetPasswordPage({
+type SearchParamsType = Promise<{
+	token?: string;
+}>;
+
+export default async function ResetPasswordPage({
 	searchParams,
 }: {
-	searchParams: { token?: string };
+	searchParams: SearchParamsType;
 }) {
+	const params = await searchParams;
+	const token = params.token;
+
 	return (
 		<div className="flex items-center justify-center min-h-screen">
-			<ResetPasswordForm token={searchParams.token} />
+			<ResetPasswordForm token={token} />
 		</div>
 	);
 }
