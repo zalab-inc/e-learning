@@ -28,7 +28,7 @@ export const loginAction = actionClient
 			}
 		} catch (error) {
 			return returnValidationErrors(LoginSchema, {
-				_errors: ["Invalid email or password"],
+				_errors: ["Email atau password tidak valid"],
 			});
 		}
 	});
@@ -44,7 +44,7 @@ export const registerAction = actionClient
 			if (user) {
 				return returnValidationErrors(RegisterSchema, {
 					email: {
-						_errors: ["A user with this email already exists"],
+						_errors: ["Email sudah terdaftar"],
 					},
 				});
 			}
@@ -63,7 +63,7 @@ export const registerAction = actionClient
 		} catch (error: unknown) {
 			return returnValidationErrors(RegisterSchema, {
 				email: {
-					_errors: ["A user with this email already exists"],
+					_errors: ["Email sudah terdaftar"],
 				},
 			});
 		}
@@ -85,7 +85,7 @@ export const changePasswordAction = actionClient
 				message: "Password berhasil diubah",
 			};
 		} catch (error) {
-			console.error("Change password error:", error);
+			console.error("Error saat mengubah password:", error);
 			return returnValidationErrors(ChangePasswordSchema, {
 				_errors: ["Link sudah tidak valid atau kadaluarsa"],
 			});
