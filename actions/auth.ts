@@ -95,48 +95,28 @@ export const changePasswordAction = actionClient
 export const forgotAction = actionClient
 	.schema(ForgotSchema)
 	.action(async ({ parsedInput }) => {
-		try {
-			const user = await prisma.user.findUnique({
-				where: { email: parsedInput.email },
-			});
+		const user = await prisma.user.findUnique({
+			where: { email: parsedInput.email },
+		});
 
-			if (!user) {
-				return returnValidationErrors(ForgotSchema, {
-					email: {
-						_errors: ["Email tidak terdaftar"],
-					},
-				});
-			}
-
-			await auth.api.forgetPassword({
-				body: {
-					email: parsedInput.email,
-				},
-			});
-
-			return {
-				success: true,
-				email: parsedInput.email,
-			};
-		} catch (error: unknown) {
-			console.error("Password reset error:", error);
-
-			// Handle validation error
-			if (error instanceof Error && error.message.includes("validation")) {
-				return returnValidationErrors(ForgotSchema, {
-					email: {
-						_errors: ["Format email tidak valid"],
-					},
-				});
-			}
-
-			// Handle other errors
+		if (!user) {
 			return returnValidationErrors(ForgotSchema, {
 				email: {
 					_errors: ["Email tidak terdaftar"],
 				},
 			});
 		}
+
+		await auth.api.forgetPassword({
+			body: {
+				email: parsedInput.email,
+			},
+		});
+
+		return {
+			success: true,
+			email: parsedInput.email,
+		};
 	});
 
 export const logoutAction = actionClient.action(async () => {

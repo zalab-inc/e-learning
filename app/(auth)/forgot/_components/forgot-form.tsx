@@ -46,10 +46,6 @@ export function ForgotForm() {
 						form.setError("email", {
 							message: error.validationErrors.email._errors[0],
 						});
-					} else if (error.validationErrors?._errors?.length) {
-						form.setError("root", {
-							message: error.validationErrors._errors[0],
-						});
 					} else if (error.serverError) {
 						form.setError("root", {
 							message: error.serverError,
