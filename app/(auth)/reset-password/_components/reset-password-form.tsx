@@ -22,54 +22,73 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/shared/password-input";
-import { RegisterSchema } from "@/defs/auth-schema";
-import { registerAction } from "@/actions/auth";
+import { ChangePasswordSchema } from "@/defs/auth-schema";
+import { changePasswordAction } from "@/actions/auth";
 import { useRouter } from "next/navigation";
 
-export function RegisterForm() {
+interface ResetPasswordFormProps {
+	token?: string;
+}
+
+export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
 	const router = useRouter();
 	const [isSuccess, setIsSuccess] = useState(false);
-	const { form, handleSubmitWithAction, resetFormAndAction } =
-		useHookFormAction(registerAction, zodResolver(RegisterSchema), {
+
+	const { form, handleSubmitWithAction } = useHookFormAction(
+		changePasswordAction,
+		zodResolver(ChangePasswordSchema),
+		{
 			actionProps: {
 				onSuccess: () => {
-					resetFormAndAction();
 					setIsSuccess(true);
-					setTimeout(() => {
-						router.replace("/login");
-					}, 2000);
 				},
 			},
 			formProps: {
 				defaultValues: {
-					email: "",
+					token: token || "",
 					password: "",
 					confirmPassword: "",
-					name: "",
 				},
 			},
-			errorMapProps: {
-				joinBy: " dan ",
-			},
-		});
+		},
+	);
+
+	if (!token) {
+		return (
+			<Card className="w-[400px]">
+				<CardHeader>
+					<CardTitle className="text-2xl text-center">
+						Link Tidak Valid
+					</CardTitle>
+				</CardHeader>
+				<CardContent className="space-y-4">
+					<p className="text-center text-muted-foreground">
+						Link reset password tidak valid atau sudah kadaluarsa.
+					</p>
+					<Button asChild className="w-full">
+						<Link href="/forgot">Minta Link Baru</Link>
+					</Button>
+				</CardContent>
+			</Card>
+		);
+	}
 
 	if (isSuccess) {
 		return (
 			<Card className="w-[400px]">
 				<CardHeader>
 					<CardTitle className="text-2xl text-center">
-						Pendaftaran Berhasil
+						Password Diperbarui
 					</CardTitle>
 				</CardHeader>
 				<CardContent className="space-y-4">
 					<p className="text-center text-muted-foreground">
-						Akun Anda telah berhasil dibuat. Anda akan dialihkan ke halaman
-						login.
+						Password Anda telah berhasil diperbarui. Anda akan dialihkan ke
+						halaman login.
 					</p>
 					<Button asChild className="w-full">
-						<Link href="/login">Ke Halaman Login</Link>
+						<Link href="/login">Kembali ke Login</Link>
 					</Button>
 				</CardContent>
 			</Card>
@@ -86,9 +105,9 @@ export function RegisterForm() {
 			</Link>
 			<Card className="max-w-sm mx-auto">
 				<CardHeader>
-					<CardTitle className="text-2xl">Daftar</CardTitle>
+					<CardTitle className="text-2xl">Reset Password</CardTitle>
 					<CardDescription>
-						Buat akun baru untuk mengakses KelasInvotif.com
+						Masukkan password baru untuk akun Anda.
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
@@ -97,55 +116,14 @@ export function RegisterForm() {
 							<div className="grid gap-4">
 								<FormField
 									control={form.control}
-									name="name"
-									render={({ field }) => (
-										<FormItem className="grid gap-2">
-											<FormLabel htmlFor="name">Nama</FormLabel>
-											<FormControl>
-												<Input
-													id="name"
-													placeholder="Nama Anda"
-													type="text"
-													autoComplete="name"
-													{...field}
-													disabled={form.formState.isSubmitting}
-												/>
-											</FormControl>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-								<FormField
-									control={form.control}
-									name="email"
-									render={({ field }) => (
-										<FormItem className="grid gap-2">
-											<FormLabel htmlFor="email">Email</FormLabel>
-											<FormControl>
-												<Input
-													id="email"
-													placeholder="alamat@email.com"
-													type="email"
-													autoComplete="email"
-													{...field}
-													disabled={form.formState.isSubmitting}
-												/>
-											</FormControl>
-											<FormMessage />
-										</FormItem>
-									)}
-								/>
-								<FormField
-									control={form.control}
 									name="password"
 									render={({ field }) => (
 										<FormItem className="grid gap-2">
-											<FormLabel htmlFor="password">Password</FormLabel>
+											<FormLabel htmlFor="password">Password Baru</FormLabel>
 											<FormControl>
 												<PasswordInput
 													id="password"
-													placeholder="Masukkan password"
-													autoComplete="new-password"
+													placeholder="********"
 													{...field}
 													disabled={form.formState.isSubmitting}
 												/>
@@ -154,6 +132,7 @@ export function RegisterForm() {
 										</FormItem>
 									)}
 								/>
+
 								<FormField
 									control={form.control}
 									name="confirmPassword"
@@ -165,8 +144,7 @@ export function RegisterForm() {
 											<FormControl>
 												<PasswordInput
 													id="confirmPassword"
-													placeholder="Ulangi password"
-													autoComplete="new-password"
+													placeholder="********"
 													{...field}
 													disabled={form.formState.isSubmitting}
 												/>
@@ -181,6 +159,7 @@ export function RegisterForm() {
 										{form.formState.errors.root.message}
 									</p>
 								) : null}
+
 								<Button type="submit" disabled={form.formState.isSubmitting}>
 									{form.formState.isSubmitting ? (
 										<>
@@ -188,25 +167,14 @@ export function RegisterForm() {
 											Memuat...
 										</>
 									) : (
-										"Daftar"
+										"Simpan Password Baru"
 									)}
 								</Button>
 							</div>
 						</form>
 					</Form>
-					<div className="mt-4 text-sm text-center">
-						Sudah punya akun?{" "}
-						<Link href="/login" className="underline">
-							Masuk
-						</Link>
-					</div>
 				</CardContent>
 			</Card>
-			<div className="mt-6 text-sm text-muted-foreground">
-				<Link href="/" className="transition-colors hover:text-foreground">
-					Kembali ke Beranda
-				</Link>
-			</div>
 		</div>
 	);
 }

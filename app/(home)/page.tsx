@@ -20,7 +20,7 @@ export default async function HomePage() {
 					<Lightbulb className="w-8 h-8" />
 				</div>
 				<h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-					KelasInvotif.com
+					KelasInovatif.com
 				</h1>
 				<p className="max-w-2xl mt-4 text-xl text-muted-foreground">
 					Platform pembelajaran AI untuk penulisan karya ilmiah. Tingkatkan
@@ -29,15 +29,15 @@ export default async function HomePage() {
 				<div className="flex flex-wrap justify-center gap-4 mt-8">
 					{session ? (
 						<Button asChild size="lg">
-							<Link href="/dashboard">Go to Dashboard</Link>
+							<Link href="/dashboard">Ke Dashboard</Link>
 						</Button>
 					) : (
 						<>
 							<Button asChild size="lg">
-								<Link href="/login">Login</Link>
+								<Link href="/login">Masuk</Link>
 							</Button>
 							<Button asChild variant="outline" size="lg">
-								<Link href="/register">Register</Link>
+								<Link href="/register">Daftar</Link>
 							</Button>
 						</>
 					)}

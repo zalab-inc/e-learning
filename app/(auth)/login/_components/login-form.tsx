@@ -53,7 +53,7 @@ export function LoginForm() {
 				},
 			},
 			errorMapProps: {
-				joinBy: " and ",
+				joinBy: " dan ",
 			},
 		});
 
@@ -78,7 +78,7 @@ export function LoginForm() {
 				<div className="flex items-center justify-center w-12 h-12 rounded-lg bg-primary text-primary-foreground">
 					<Lightbulb className="w-6 h-6" />
 				</div>
-				<span className="text-lg font-semibold">KelasInvotif.com</span>
+				<span className="text-lg font-semibold">KelasInovatif.com</span>
 			</Link>
 			<Card className="max-w-sm mx-auto">
 				<CardHeader>
@@ -100,7 +100,7 @@ export function LoginForm() {
 											<FormControl>
 												<Input
 													id="email"
-													placeholder="johndoe@mail.com"
+													placeholder="alamat@email.com"
 													type="email"
 													autoComplete="email"
 													{...field}
@@ -128,7 +128,7 @@ export function LoginForm() {
 											<FormControl>
 												<PasswordInput
 													id="password"
-													placeholder="******"
+													placeholder="Masukkan password"
 													autoComplete="current-password"
 													{...field}
 													disabled={form.formState.isSubmitting}

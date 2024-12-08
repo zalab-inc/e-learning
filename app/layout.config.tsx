@@ -24,4 +24,5 @@ export const baseOptions: BaseLayoutProps = {
 			active: "none",
 		},
 	],
+	githubUrl: "https://github.com/fumadocs/fuma-starter",
 };

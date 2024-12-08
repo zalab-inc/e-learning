@@ -10,7 +10,6 @@ import {
 } from "@/defs/auth-schema";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { redirect } from "next/navigation";
 
 export const loginAction = actionClient
 	.schema(LoginSchema)
@@ -54,7 +53,7 @@ export const registerAction = actionClient
 				body: {
 					email: parsedInput.email,
 					password: parsedInput.password,
-					name: parsedInput.email.split("@")[0],
+					name: parsedInput.name,
 				},
 				redirect: false,
 			});
@@ -73,26 +72,71 @@ export const registerAction = actionClient
 export const changePasswordAction = actionClient
 	.schema(ChangePasswordSchema)
 	.action(async ({ parsedInput }) => {
-		// Add your change password logic here
-		return {
-			message: "Password changed successfully",
-		};
+		try {
+			await auth.api.resetPassword({
+				body: {
+					token: parsedInput.token,
+					newPassword: parsedInput.password,
+				},
+			});
+
+			return {
+				success: true,
+				message: "Password berhasil diubah",
+			};
+		} catch (error) {
+			console.error("Change password error:", error);
+			return returnValidationErrors(ChangePasswordSchema, {
+				_errors: ["Link sudah tidak valid atau kadaluarsa"],
+			});
+		}
 	});
 
 export const forgotAction = actionClient
 	.schema(ForgotSchema)
 	.action(async ({ parsedInput }) => {
-		await new Promise((resolve) => setTimeout(resolve, 1000));
-		if (parsedInput.email !== "test@example.com") {
+		try {
+			const user = await prisma.user.findUnique({
+				where: { email: parsedInput.email },
+			});
+
+			if (!user) {
+				return returnValidationErrors(ForgotSchema, {
+					email: {
+						_errors: ["Email tidak terdaftar"],
+					},
+				});
+			}
+
+			await auth.api.forgetPassword({
+				body: {
+					email: parsedInput.email,
+				},
+			});
+
+			return {
+				success: true,
+				email: parsedInput.email,
+			};
+		} catch (error: unknown) {
+			console.error("Password reset error:", error);
+
+			// Handle validation error
+			if (error instanceof Error && error.message.includes("validation")) {
+				return returnValidationErrors(ForgotSchema, {
+					email: {
+						_errors: ["Format email tidak valid"],
+					},
+				});
+			}
+
+			// Handle other errors
 			return returnValidationErrors(ForgotSchema, {
-				_errors: ["Invalid email or password"],
+				email: {
+					_errors: ["Email tidak terdaftar"],
+				},
 			});
 		}
-
-		return {
-			successful: true,
-			email: parsedInput.email,
-		};
 	});
 
 export const logoutAction = actionClient.action(async () => {

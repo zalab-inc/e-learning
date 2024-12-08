@@ -6,8 +6,8 @@ import { z } from "zod";
  * @property {string} password - User's password (minimum 1 character)
  */
 export const LoginSchema = z.object({
-	email: z.string().email({ message: "Invalid email address" }),
-	password: z.string().min(1, { message: "Password is required" }),
+	email: z.string().email({ message: "Format email tidak valid" }),
+	password: z.string().min(1, { message: "Password harus diisi" }),
 });
 
 export type LoginFormData = z.infer<typeof LoginSchema>;
@@ -20,12 +20,13 @@ export type LoginFormData = z.infer<typeof LoginSchema>;
  */
 export const RegisterSchema = z
 	.object({
-		email: z.string().email("Please enter a valid email"),
-		password: z.string().min(8, "Password must be at least 8 characters"),
+		email: z.string().email("Format email tidak valid"),
+		name: z.string().min(1, "Nama harus diisi"),
+		password: z.string().min(8, "Password minimal 8 karakter"),
 		confirmPassword: z.string(),
 	})
 	.refine((data) => data.password === data.confirmPassword, {
-		message: "Passwords must match",
+		message: "Password tidak sama",
 		path: ["confirmPassword"],
 	});
 
@@ -39,12 +40,12 @@ export type RegisterFormData = z.infer<typeof RegisterSchema>;
  */
 export const ChangePasswordSchema = z
 	.object({
-		token: z.string().min(1, "Token is required"),
-		password: z.string().min(8, "Password must be at least 8 characters"),
+		token: z.string().min(1, "Token tidak valid"),
+		password: z.string().min(8, "Password minimal 8 karakter"),
 		confirmPassword: z.string(),
 	})
 	.refine((data) => data.password === data.confirmPassword, {
-		message: "Passwords must match",
+		message: "Password tidak sama",
 		path: ["confirmPassword"],
 	});
 
@@ -55,7 +56,7 @@ export type ChangePasswordFormData = z.infer<typeof ChangePasswordSchema>;
  * @property {string} email - User's email address
  */
 export const ForgotSchema = z.object({
-	email: z.string().email("Please enter a valid email"),
+	email: z.string().email("Format email tidak valid"),
 });
 
 export type ForgotFormData = z.infer<typeof ForgotSchema>;
