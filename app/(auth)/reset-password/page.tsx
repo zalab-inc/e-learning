@@ -3,12 +3,7 @@ import { ResetPasswordForm } from "./_components/reset-password-form";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Reset Password | KelasInovatif.com",
-	description: "Buat password baru untuk akun KelasInovatif.com Anda",
-	openGraph: {
-		title: "Reset Password | KelasInovatif.com",
-		description: "Buat password baru untuk akun KelasInovatif.com Anda",
-	},
+	title: "Reset Password",
 };
 
 type SearchParamsType = Promise<{

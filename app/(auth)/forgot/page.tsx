@@ -3,7 +3,7 @@ import { ForgotForm } from "./_components/forgot-form";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Lupa Password | KelasInvotif.com",
+	title: "Lupa Password",
 	description: "Reset password akun KelasInvotif.com Anda",
 };
 

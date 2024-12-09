@@ -21,16 +21,16 @@ const data = {
 			url: "#",
 			items: [
 				{
+					title: "Dashboard",
+					url: "/dashboard",
+				},
+				{
 					title: "Account",
-					url: "#",
+					url: "/dashboard/account",
 				},
 				{
 					title: "Profile",
-					url: "#",
-				},
-				{
-					title: "Courses",
-					url: "/course",
+					url: "/dashboard/profile",
 				},
 			],
 		},
