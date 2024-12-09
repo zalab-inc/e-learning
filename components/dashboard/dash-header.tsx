@@ -9,8 +9,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { Button } from "@/components/ui/button";
-import { Bell } from "lucide-react";
+import { HeaderDropdown } from "@/components/dashboard/header-dropdown";
 
 interface BreadcrumbItemType {
 	title: string;
@@ -50,10 +49,7 @@ export function DashHeader({ items = [] }: DashHeaderProps) {
 				</Breadcrumb>
 			</div>
 			<div className="flex items-center gap-2">
-				<Button variant="ghost" size="icon" className="relative">
-					<Bell className="w-5 h-5" />
-					<span className="absolute w-2 h-2 bg-red-500 rounded-full top-2 right-2" />
-				</Button>
+				<HeaderDropdown />
 			</div>
 		</header>
 	);
