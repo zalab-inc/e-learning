@@ -1,6 +1,6 @@
 "use client";
 
-import { BadgeCheck, Bell, CreditCard, Sparkles, User } from "lucide-react";
+import { BadgeCheck, Bell, CreditCard, HomeIcon, User } from "lucide-react";
 import { LogoutButton } from "@/components/shared/logout";
 import { authClient } from "@/lib/auth-client";
 import { useEffect, useState } from "react";
@@ -16,6 +16,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 type BetterAuthUser = {
 	id: string;
@@ -81,9 +82,11 @@ export function HeaderDropdown() {
 				</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				<DropdownMenuGroup>
-					<DropdownMenuItem>
-						<Sparkles className="w-4 h-4 mr-2" />
-						<span>Upgrade to Pro</span>
+					<DropdownMenuItem asChild>
+						<Link href="/dashboard" className="cursor-pointer">
+							<HomeIcon className="w-4 h-4 mr-2" />
+							<span>Dashboard</span>
+						</Link>
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 				<DropdownMenuSeparator />
